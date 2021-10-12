@@ -4,7 +4,7 @@
     :headers="tableHeaders"
     :showTitle="false"
     :title="tableTitle"
-   
+    :showIcon="true"
   >
    
   </data-table>
@@ -28,6 +28,8 @@ export default {
     ],
 
     tableTitle: "USERS",
+
+    icons:[],
   }),
 
   methods: {

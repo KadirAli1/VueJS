@@ -4,6 +4,7 @@
     :headers="tableHeaders"
     :showTitle="true"
     :title="postTitle"
+    :showIcon="false"
   />
 
 </template>
@@ -25,6 +26,9 @@ export default {
     ],
 
     postTitle: "POSTS",
+
+    icons:[]
+
   }),
   components: {
     "data-table": require("@/components/Table/DataTable.vue").default,

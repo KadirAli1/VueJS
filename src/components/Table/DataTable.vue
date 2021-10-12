@@ -4,7 +4,7 @@
       <h1 v-if="showTitle">{{ title }}</h1>
 
       <v-data-table :headers="headers" :items="items">
-        <template v-slot:[`item.actions`]="{ item }">
+        <template v-if="showIcon" v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
@@ -45,6 +45,9 @@ export default {
       // required: false,
       // default: ""
     },
+    showIcon:{
+      type: Boolean
+    }
   },
   // mounted() {
   //     this.tableItems = this.items
