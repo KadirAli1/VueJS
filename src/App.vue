@@ -14,17 +14,8 @@
 
       <v-divider></v-divider>
 
-      <v-list
-        dense
-        nav
-      >
-        <v-list-item
-          v-for="item in items"
-          :key="item.title"
-          :to="item.to"
-          link
-        
-        >
+      <v-list dense nav>
+        <v-list-item v-for="item in items" :key="item.title" :to="item.to" link>
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -36,7 +27,7 @@
       </v-list>
     </v-navigation-drawer>
 
-     <v-app-bar
+    <v-app-bar
       app
       color="primary"
       dark
@@ -76,16 +67,16 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-       drawer: null,
+export default {
+  data: () => ({
+    drawer: null,
 
-        items: [
-          { title: 'Todo', icon: 'mdi-format-list-checks', to: "/"  },
-          { title: 'About', icon: 'mdi-help-box', to: '/about' },
-          { title: 'Posts', icon: 'mdi-table-large-plus', to: '/posts' },
-          { title: 'Usrers', icon: 'mdi-table-large-plus', to: '/users' }
-        ],
-        }),
-  }
+    items: [
+      { title: "To do", icon: "mdi-format-list-checks", to: "/" },
+      { title: "About", icon: "mdi-help-box", to: "/about" },
+      { title: "Posts", icon: "mdi-table-large-plus", to: "/posts" },
+      { title: "Usrers", icon: "mdi-table-large-plus", to: "/users" },
+    ],
+  }),
+};
 </script>

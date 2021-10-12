@@ -1,18 +1,23 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-withCredentials: false,
-headers: {
+  baseURL: "https://jsonplaceholder.typicode.com",
+  withCredentials: false,
+  headers: {
     Accept: "application/json",
-    "Content-Type": "application/json"
-},
-})
+    "Content-Type": "application/json",
+  },
+});
 
 export default {
-    getPosts(){
-        return apiClient.get("https://jsonplaceholder.typicode.com/posts")
-    },
-    getUsers(){
-        return apiClient.get("https://jsonplaceholder.typicode.com/users")
-    }
-}
+  getPosts() {
+    return apiClient.get("posts");
+  },
+  getUsers() {
+    return apiClient.get("/users");
+  },
+
+  //   getFirstUSer() {
+  //     return apiClient.get(`users/${userId}`);
+  //   },
+};
