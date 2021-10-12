@@ -17,7 +17,10 @@ export default {
     return apiClient.get("/users");
   },
 
-  //   getFirstUSer() {
-  //     return apiClient.get(`users/${userId}`);
-  //   },
+    gettUser() {
+      return apiClient.get(`users/${userId}`);
+    },
+    getUserPost() {
+      return apiClient.get(`posts?userId=${userId}`);
+    },
 };

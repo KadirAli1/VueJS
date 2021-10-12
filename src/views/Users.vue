@@ -2,11 +2,11 @@
   <data-table
     :items="users"
     :headers="tableHeaders"
-    v-bind:showTitle="false"
+    :showTitle="false"
     :title="tableTitle"
-    sort-by="calories"
-    class="elevation-1"
+   
   >
+   
   </data-table>
 </template>
 
@@ -15,15 +15,10 @@ import axios from "../services/axios";
 export default {
   data: () => ({
     users: [],
-    drawer: null,
+
 
     tableHeaders: [
-      {
-        // text: 'Dessert (100g serving)',
-        align: "start",
-        sortable: false,
-        value: "name",
-      },
+    
       { text: "Id", value: "id" },
       { text: " Name", value: "name" },
       { text: "User Name", value: "username" },
@@ -37,15 +32,18 @@ export default {
 
   methods: {
     getAllData() {
-      axios.getUsers().then((response) => (this.users = response.data));
+      axios.getUsers()
+      .then((response) => (this.users = response.data))
+      .catch(error => console.log(error));
     },
   },
   components: {
     "data-table": require("@/components/Table/DataTable.vue").default,
   },
   mounted: function() {
-    // axios.getUsers().then((response) => (this.users = response.data));
+
     this.getAllData();
+
     // axios.getFirstUSer().then((response) => {
     //   console.log(response.data);
     // });
