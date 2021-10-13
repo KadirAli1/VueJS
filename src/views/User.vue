@@ -32,7 +32,7 @@ export default {
 
     const url = this.$route.params.userId
 
-    console.log("KAdir")
+    console.log(url)
 
 
   }
