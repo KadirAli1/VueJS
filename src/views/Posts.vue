@@ -36,6 +36,7 @@ export default {
 
   mounted(){
     axios.getPosts().then((response) => (this.posts = response.data));
+    console.log("KAdir")
   },
 
   methods: {

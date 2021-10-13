@@ -33,10 +33,14 @@ export default {
   methods:{
     goToUser(userId){
       this.$router.push(`user/${userId}`);
+
     },
     goToUserPosts(userId){
       this.$router.push(`posts?userId=${userId}`);
     }
+  },
+  mounted(){
+    console.log("Components")
   },
   props: {
     items: {
