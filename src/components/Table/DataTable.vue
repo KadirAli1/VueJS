@@ -4,18 +4,19 @@
       <h1 v-if="showTitle">{{ title }}</h1>
 
       <v-data-table :headers="headers" :items="items">
-        <template v-if="showIcon" v-slot:[`item.actions`]="{ item }">
-          <router-link to="/user">
-            <v-icon small class="mr-2">
+       
+          <template v-if="showIcon" v-slot:[`item.actions`]="{ item }">
+          <!-- <router-link to="`user/${item.id}`" > -->
+            <v-icon small class="mr-2" @click="goToUser(item.id)">
               mdi-account
             </v-icon>
-          </router-link>
+          <!-- </router-link> -->
 
-          <router-link to="/userPosts">
-            <v-icon small>
+          <!-- <router-link to="/userPosts"> -->
+            <v-icon small @click="goToUserPosts(item.id)">
               mdi-post
             </v-icon>
-          </router-link>
+          <!-- </router-link> -->
         </template>
       </v-data-table>
     </v-card>
@@ -23,12 +24,20 @@
 </template>
 
 <script>
+
 export default {
   data: () => ({
     //   tableHeaders: [],
     //   tableItems: [],
   }),
-
+  methods:{
+    goToUser(userId){
+      this.$router.push(`user/${userId}`);
+    },
+    goToUserPosts(userId){
+      this.$router.push(`posts?userId=${userId}`);
+    }
+  },
   props: {
     items: {
       type: Array,
