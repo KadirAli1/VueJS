@@ -5,12 +5,17 @@
 
       <v-data-table :headers="headers" :items="items">
         <template v-if="showIcon" v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item)">
-            mdi-delete
-          </v-icon>
+          <router-link to="/user">
+            <v-icon small class="mr-2">
+              mdi-account
+            </v-icon>
+          </router-link>
+
+          <router-link to="/userPosts">
+            <v-icon small>
+              mdi-post
+            </v-icon>
+          </router-link>
         </template>
       </v-data-table>
     </v-card>
@@ -45,18 +50,15 @@ export default {
       // required: false,
       // default: ""
     },
-    showIcon:{
-      type: Boolean
-    }
+    showIcon: {
+      type: Boolean,
+    },
   },
-  // mounted() {
-  //     this.tableItems = this.items
-  //     this.tableHeaders = this.headers
-
-  //   axios.get("https://jsonplaceholder.typicode.com/posts").then((response) => (this.posts = response.data))
-
-  // }
 };
 </script>
 
-<style></style>
+<style>
+.mr-2 {
+  text-decoration: none;
+}
+</style>

@@ -14,13 +14,13 @@ export default {
     return apiClient.get("posts");
   },
   getUsers() {
-    return apiClient.get("/users");
+    return apiClient.get("users");
   },
 
-    gettUser() {
-      return apiClient.get(`users/${userId}`);
-    },
-    getUserPost() {
-      return apiClient.get(`posts?userId=${userId}`);
-    },
+  gettUser() {
+    return apiClient.get(`users/${userId}`);
+  },
+  getUserPost() {
+    return apiClient.get(`posts?userId=${userId}`);
+  },
 };
