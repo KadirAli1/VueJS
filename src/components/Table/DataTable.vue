@@ -4,18 +4,17 @@
       <h1 v-if="showTitle">{{ title }}</h1>
 
       <v-data-table :headers="headers" :items="items">
-       
-          <template v-if="showIcon" v-slot:[`item.actions`]="{ item }">
+        <template v-if="showIcon" v-slot:[`item.actions`]="{ item }">
           <!-- <router-link to="`user/${item.id}`" > -->
-            <v-icon small class="mr-2" @click="goToUser(item.id)">
-              mdi-account
-            </v-icon>
+          <v-icon small class="mr-2" @click="goToUser(item.id)">
+            mdi-account
+          </v-icon>
           <!-- </router-link> -->
 
           <!-- <router-link to="/userPosts"> -->
-            <v-icon small @click="goToUserPosts(item.id)">
-              mdi-post
-            </v-icon>
+          <v-icon small @click="goToUserPosts(item.id)">
+            mdi-post
+          </v-icon>
           <!-- </router-link> -->
         </template>
       </v-data-table>
@@ -24,23 +23,21 @@
 </template>
 
 <script>
-
 export default {
   data: () => ({
     //   tableHeaders: [],
     //   tableItems: [],
   }),
-  methods:{
-    goToUser(userId){
+  methods: {
+    goToUser(userId) {
       this.$router.push(`user/${userId}`);
-
     },
-    goToUserPosts(userId){
+    goToUserPosts(userId) {
       this.$router.push(`posts?userId=${userId}`);
-    }
+    },
   },
-  mounted(){
-    console.log("Components")
+  mounted() {
+    // console.log("Components")
   },
   props: {
     items: {
