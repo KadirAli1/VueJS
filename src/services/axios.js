@@ -18,7 +18,7 @@ export default {
   },
 
   getUser(userId) {
-    return apiClient.get(`users/${userId}` + userId);
+    return apiClient.get(`users/${userId}`);
   },
   getUserPost() {
     return apiClient.get(`posts?userId=${userId}`);

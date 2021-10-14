@@ -31,9 +31,10 @@ const routes = [
     component: User,
   },
   {
-    path: "/userPosts",
+    path: "/userPosts/:userId",
     name: "UserPosts",
     component: UserPosts,
+    children: [{ path: "posts/", component: Posts }],
   },
 
   {
