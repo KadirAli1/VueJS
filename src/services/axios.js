@@ -20,7 +20,7 @@ export default {
   getUser(userId) {
     return apiClient.get(`users/${userId}`);
   },
-  getUserPost() {
+  getUserPost(userId) {
     return apiClient.get(`posts?userId=${userId}`);
   },
 };

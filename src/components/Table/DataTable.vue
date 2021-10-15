@@ -34,6 +34,7 @@ export default {
     },
     goToUserPosts(userId) {
       this.$router.push(`posts?userId=${userId}`);
+      // this.$router.push(`userPosts/${userId}`);
     },
   },
   mounted() {
