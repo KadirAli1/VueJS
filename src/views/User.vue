@@ -5,23 +5,16 @@
     </h3>
 
     <ul>
-      <li>
-        {{ users }}
-      </li>
-      <!-- <li>{{ users.name }}</li>
+      <!-- <li>
+        {{ users }} -->
+      <!-- </li> -->
+      <li>{{ users.name }}</li>
       <li>{{ users.username }}</li>
       <li>{{ users.address ? users.address.city : null }}</li>
       <li>{{ users.phone }}</li>
-      <li>{{ users.company ? users.company.name : null }}</li> -->
+      <li>{{ users.company ? users.company.name : null }}</li>
     </ul>
   </div>
-  <!-- <data-table
-    :items="users"
-    :headers="tableHeaders"
-    :showTitle="false"
-    :showIcon="true"
-  >
-  </data-table> -->
 </template>
 
 <script>

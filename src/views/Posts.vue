@@ -5,9 +5,12 @@
     :showTitle="true"
     :title="postTitle"
     :showIcon="false"
-  >
-    <!-- <h1>{{ users.name }}</h1> -->
-  </data-table>
+  />
+
+  <!-- <div>
+    <li>{{ users.name }}</li>
+    <li>{{ posts }}</li>
+  </div> -->
 </template>
 
 <script>
@@ -26,7 +29,7 @@ export default {
       { text: "Actions", value: "actions", sortable: false },
     ],
 
-    postTitle: "POSTS",
+    postTitle: "POSTS ",
 
     icons: [],
   }),
@@ -37,6 +40,12 @@ export default {
   mounted() {
     const userId = this.$route.query.userId;
     console.log(userId);
+
+    axios.getUser(userId).then((response) => {
+      this.postTitle = response.data.name;
+      console.log(response.data);
+    });
+
     if (userId) {
       axios.getUserPost(userId).then((response) => {
         this.posts = response.data;
