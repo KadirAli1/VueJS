@@ -3,8 +3,9 @@
     :items="posts"
     :headers="tableHeaders"
     :showTitle="true"
-    :title="postTitle"
+    :titleHeader="postTitle"
     :showIcon="false"
+    :showButtonPost="true"
   />
 
   <!-- <div>
@@ -32,6 +33,7 @@ export default {
     postTitle: "POSTS ",
 
     icons: [],
+
   }),
   components: {
     "data-table": require("@/components/Table/DataTable.vue").default,
@@ -41,22 +43,26 @@ export default {
     const userId = this.$route.query.userId;
     console.log(userId);
 
-    axios.getUser(userId).then((response) => {
-      this.postTitle = response.data.name;
-      console.log(response.data);
-    });
-
+    
     if (userId) {
       axios.getUserPost(userId).then((response) => {
         this.posts = response.data;
         console.log(response.data);
-      });
+        
+      }
+      
+      );
+      axios.getUser(userId).then((response) => {
+      this.postTitle = response.data.name;
+      console.log(response.data);
+    });
+
     } else {
       axios.getPosts().then((response) => (this.posts = response.data));
     }
   },
 
-  methods: {},
+  methods: {}
 };
 </script>
 

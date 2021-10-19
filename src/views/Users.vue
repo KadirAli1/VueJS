@@ -5,6 +5,7 @@
     :showTitle="false"
     :title="tableTitle"
     :showIcon="true"
+    :showButtonPost="false"
   >
    
   </data-table>
@@ -43,12 +44,7 @@ export default {
     "data-table": require("@/components/Table/DataTable.vue").default,
   },
   mounted: function() {
-
     this.getAllData();
-
-    // axios.getFirstUSer().then((response) => {
-    //   console.log(response.data);
-    // });
   },
 };
 </script>

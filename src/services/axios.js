@@ -23,4 +23,8 @@ export default {
   getUserPost(userId) {
     return apiClient.get(`posts?userId=${userId}`);
   },
+  registerPost(){
+    return apiClient.post("posts")
+  }
+  
 };

@@ -1,88 +1,68 @@
 <template>
   <v-container>
-       <v-row justify="center">
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="600px"
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="primary"
-          dark
-          v-bind="attrs"
-          v-on="on"
-          class="add-posts"
-        >
-          Add post
-        </v-btn>
-      </template>
-      <v-card>
-        <v-card-title>
-          <span class="text-h5">New Post</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col
-                cols="12"
-                sm="6"
-                md="4"
-              >
-                <v-text-field
-                  label="Title "
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-                md="4"
-              >
-                <v-text-field
-                  label="Body"
-                  hint="example of helper text only on focus"
-                ></v-text-field>
-              </v-col>
-            
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-autocomplete
-                  :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                  label="User Id"
-                  multiple
-                ></v-autocomplete>
-              </v-col>
-            </v-row>
-          </v-container>
-          <small>*indicates required field</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
+    <v-row justify="center">
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <template v-if="showButtonPost" v-slot:activator="{ on, attrs }">
           <v-btn
-            color="blue darken-1"
-            text
-            @click="dialog = false"
+            color="primary"
+            dark
+            v-bind="attrs"
+            v-on="on"
+            class="add-posts  mb-6"
+            left
           >
-            Close
+            Add post
           </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="dialog = false"
-          >
-            Save
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-row>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="text-h5">New Post</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field
+                    label="Title "
+                    required
+                    v-model="title"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="4">
+                  <v-textarea
+                    label="Body"
+                    hint="example of helper text only on focus"
+                    v-model="body"
+                  ></v-textarea>
+                </v-col>
+
+                <v-col cols="12" sm="6">
+                  <v-select
+                    :items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+                    label="Name:"
+                    v-model="name"
+                    
+                  ></v-select>
+                </v-col>
+              </v-row>
+            </v-container>
+            <small>*indicates required field</small>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false">
+              Close
+            </v-btn>
+            <v-btn color="blue darken-1" text @click="registerPost">
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
     <v-card>
-  
-      <h1 v-if="showTitle">{{ title }}</h1>
-   
+      <h1 v-if="showTitle">{{ titleHeader }}</h1>
+
       <v-data-table :headers="headers" :items="items">
         <template v-if="showIcon" v-slot:[`item.actions`]="{ item }">
           <!-- <router-link to="`user/${item.id}`" > -->
@@ -103,21 +83,43 @@
 </template>
 
 <script>
+import axios from "../../services/axios";
 export default {
   data: () => ({
-   dialog: false,
+    dialog: false,
+      body: "",
+      name: "",
+     title: "",
   }),
+
   methods: {
     goToUser(userId) {
       this.$router.push(`user/${userId}`);
     },
     goToUserPosts(userId) {
       this.$router.push(`posts?userId=${userId}`);
-      // this.$router.push(`userPosts/${userId}`);
     },
+
+    registerPost() {
+
+      fetch("https://jsonplaceholder.typicode.com/posts/", {
+        method: "POST",
+        body: JSON.stringify({
+          title: this.title,
+          body: this.body,
+          userId: this.name,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => this.items.push(json))
+        // console.log(json)
+    }
   },
   mounted() {
-    // console.log("Components")
+   
   },
   props: {
     items: {
@@ -130,7 +132,7 @@ export default {
       required: true,
       default: [],
     },
-    title: {
+    titleHeader: {
       type: String,
       required: false,
       default: "",
@@ -143,12 +145,15 @@ export default {
     showIcon: {
       type: Boolean,
     },
+    showButtonPost: {
+      type: Boolean,
+    },
   },
 };
 </script>
 
 <style>
-.add-posts{
+.add-posts {
   margin: 10px;
   margin-bottom: 10px;
 }

@@ -27,31 +27,8 @@ export default {
   methods: {
     getUserPosts() {
       axios.getUserPosts(this.$route.params.userId).then((response) => {
-        // this.users = this.users.filter((users) => users.userId == id);
-        // this.$router.push(`posts?userId=${userId}`);
-        // this.$route.push(`posts?userId=${userId}`) = response.data;
         this.$router.push(`posts?userId=${userId}`) == response.data;
       });
-
-      // if(users) {
-      //   axios
-      //     .getUserPosts(this.$route.params.userId)
-      //     .then((response) => (this.users = response.data));
-      // },
-
-      // computed: {
-      //   queryParams() {
-      //     return this.$route.query;
-      //   },
-
-      // getUser(userId) {
-      //   axios
-      //     .getUser(this.$route.params.userId)
-      //     .then(
-      //       (response) =>
-      //         this.$router.push(`posts?userId=${userId}`) == response.data
-      //     );
-      // console.log(response.data));
     },
   },
 

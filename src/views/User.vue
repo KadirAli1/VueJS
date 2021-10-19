@@ -5,9 +5,6 @@
     </h3>
 
     <ul>
-      <!-- <li>
-        {{ users }} -->
-      <!-- </li> -->
       <li>{{ users.name }}</li>
       <li>{{ users.username }}</li>
       <li>{{ users.address ? users.address.city : null }}</li>
