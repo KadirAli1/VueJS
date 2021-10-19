@@ -38,9 +38,11 @@
 
                 <v-col cols="12" sm="6">
                   <v-select
-                    :items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+                    item-text='name'
+                    item-value="id"
+                    :items="users"
                     label="Name:"
-                    v-model="name"
+                    v-model="userId"
                     
                   ></v-select>
                 </v-col>
@@ -86,9 +88,10 @@
 import axios from "../../services/axios";
 export default {
   data: () => ({
+    users: [],
     dialog: false,
       body: "",
-      name: "",
+      userId: null,
      title: "",
   }),
 
@@ -100,25 +103,45 @@ export default {
       this.$router.push(`posts?userId=${userId}`);
     },
 
-    registerPost() {
 
+     getAllData() {
+      axios.getUsers()
+      .then((response) => (this.users = response.data))
+      .catch(error => console.log(error));
+    },
+
+    registerPost() {
       fetch("https://jsonplaceholder.typicode.com/posts/", {
         method: "POST",
         body: JSON.stringify({
           title: this.title,
           body: this.body,
-          userId: this.name,
+          userId: this.userId,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       })
         .then((response) => response.json())
-        .then((json) => this.items.push(json))
+        .then((json) => 
+        {
+          this.items = [ ...this.items, json]
+          this.title = null;
+          this.body = null;
+        
+        })
+
         // console.log(json)
     }
   },
   mounted() {
+    this.getAllData()
+     const userId = this.$route.query.userId;
+     console.log(userId)
+     if(userId){
+       this.userId = Number(userId)
+       console.log(typeof(userId))
+     }
    
   },
   props: {
@@ -148,6 +171,10 @@ export default {
     showButtonPost: {
       type: Boolean,
     },
+
+    // userId: {
+    //   type: Number,
+    // }
   },
 };
 </script>
